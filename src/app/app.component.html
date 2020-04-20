@@ -1,0 +1,64 @@
+<app-nav-bar></app-nav-bar>
+<div class="container pt-3 pb-3">
+  <h5>World Covid19 Live Status : {{currentDT | date:'fullDate'}} <span class="text-secondary"></span>
+    <span class="spinner-grow text-danger text-small" role="status"></span>
+  </h5>
+  <hr />
+  <div *ngIf='serverResponse==true; then showData else showError'></div>
+  <hr />
+</div>
+<div class="container pt-3 pb-3">
+  <div class="pb-1" *ngIf='serverResponse==true'>
+    <div class="row">
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <app-country-wise [stateData]='stateData'></app-country-wise>
+      </div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <app-chart-js></app-chart-js>
+      </div>
+    </div>
+    <!-- <app-country-wise></app-country-wise> -->
+  </div>
+</div>
+
+<ng-template #showData>
+  <div class="card-deck text-white text-center text-uppercase">
+    <div class="card bg-info">
+      <div class="card-body">
+        <p class="card-text">{{confirmedCase}}
+          <br />
+          <span class="text-small">[ + {{confirmedNewCase}} ]</span>
+        </p>
+      </div>
+      <div class="card-footer">Confirmed</div>
+    </div>
+    <div class="card bg-danger">
+      <div class="card-body">
+        <p class="card-text">{{activeCase}}</p>
+      </div>
+      <div class="card-footer">Active</div>
+    </div>
+    <div class="card bg-success">
+      <div class="card-body">
+        <p class="card-text">{{RecoveredCase}}
+          <br />
+          <span class="text-small">[ + {{RecoveredNewCase}} ]</span>
+        </p>
+      </div>
+      <div class="card-footer">Recovered</div>
+    </div>
+    <div class="card bg-secondary">
+      <div class="card-body">
+        <p class="card-text">{{DeceasedCase}}
+          <br />
+          <span class="text-small">[ + {{DeceasedNewCase}} ]</span>
+        </p>
+      </div>
+      <div class="card-footer">Deceased</div>
+    </div>
+  </div>
+</ng-template>
+<ng-template #showError>
+  We are extremly sorry ! Some Problem occured at our end .
+</ng-template>
+<app-footer></app-footer>
